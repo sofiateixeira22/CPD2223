@@ -1,0 +1,13 @@
+plugins {
+    // Apply the application plugin to add support for building a CLI application in Java.
+    id 'application'
+}
+
+dependencies {
+    implementation project(':shared')
+}
+
+application {
+    // Define the main class for the application.
+    mainClass = 'com.cpd.client.Main'
+}

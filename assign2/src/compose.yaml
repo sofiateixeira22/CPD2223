@@ -1,0 +1,14 @@
+services:
+  server:
+    container_name: server
+    image: gradle:8-jdk17
+    volumes:
+      - './:/home/gradle'
+    command: gradle :server:run
+
+  client:
+    container_name: client
+    image: gradle:8-jdk17
+    volumes:
+      - './:/home/gradle'
+    command: gradle :client:run

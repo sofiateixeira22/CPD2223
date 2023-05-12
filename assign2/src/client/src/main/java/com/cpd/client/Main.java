@@ -1,9 +1,7 @@
 package com.cpd.client;
 
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
-import java.nio.channels.SocketChannel;
+import java.io.*;
+import java.net.*;
 import com.cpd.shared.Consts;
 
 public class Main {
@@ -12,26 +10,23 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println(new Consts().getGreeting());
-        try {
+        try (
             // Create a new socket channel and connect to the server
-            SocketChannel socketChannel = SocketChannel.open();
-            socketChannel.connect(new InetSocketAddress(SERVER_ADDRESS, SERVER_PORT));
-
+            Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        ) {
             // Write a message to the server
             String message = "Hello from the client!";
-            ByteBuffer buffer = ByteBuffer.wrap(message.getBytes());
-            socketChannel.write(buffer);
+            out.println(message);
             System.out.println("Sent message to server: " + message);
 
             // Read a response from the server
-            ByteBuffer responseBuffer = ByteBuffer.allocate(1024);
-            socketChannel.read(responseBuffer);
-            responseBuffer.flip();
-            String response = new String(responseBuffer.array()).trim();
+            String response = in.readLine();
             System.out.println("Received message from server: " + response);
 
             // Close the socket channel
-            socketChannel.close();
+            socket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

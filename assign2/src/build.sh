@@ -1,0 +1,1 @@
+docker run --rm -u "1000:1000" -v $PWD:/app -w /app gradle:8-jdk17 gradle --no-build-cache --no-daemon shadowJar

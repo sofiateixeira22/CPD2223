@@ -1,3 +1,7 @@
+repositories {
+    mavenCentral()
+}
+
 subprojects {
     apply plugin: 'java'
 
@@ -14,21 +18,21 @@ subprojects {
         }
     }
 
-    task createBuildSuccessFile {
-        doLast {
-            if (project.hasProperty('buildDir')) {
-                def buildDir = project.buildDir
-                def successFile = new File(buildDir, 'build-success.txt')
-                if (successFile.createNewFile()) {
-                    println "Build success file created: ${successFile.absolutePath}"
-                } else {
-                    println "Build success file already exists: ${successFile.absolutePath}"
-                }
-            } else {
-                println "Build directory not found."
-            }
-        }
-    }
+    // task createBuildSuccessFile {
+    //     doLast {
+    //         if (project.hasProperty('buildDir')) {
+    //             def buildDir = project.buildDir
+    //             def successFile = new File(buildDir, 'build-success.txt')
+    //             if (successFile.createNewFile()) {
+    //                 println "Build success file created: ${successFile.absolutePath}"
+    //             } else {
+    //                 println "Build success file already exists: ${successFile.absolutePath}"
+    //             }
+    //         } else {
+    //             println "Build directory not found."
+    //         }
+    //     }
+    // }
 
-    build.finalizedBy createBuildSuccessFile
+    // build.finalizedBy createBuildSuccessFile
 }

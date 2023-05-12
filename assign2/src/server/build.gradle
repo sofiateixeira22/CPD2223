@@ -1,6 +1,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
 }
 
 dependencies {
@@ -11,3 +12,21 @@ application {
     // Define the main class for the application.
     mainClass = 'com.cpd.server.Main'
 }
+
+shadowJar {
+  // set the name of the output JAR file
+  archiveFileName = 'server.jar'
+
+  // exclude any files you don't want to include in the fat JAR
+  exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
+}
+
+// jar {
+//   manifest {
+//     attributes(
+//       'Main-Class': application.mainClass,
+//       // 'Class-Path': configurations.runtime.files.collect { "lib/$it.name" }.join(' ')
+//     )
+      
+//   }
+// }

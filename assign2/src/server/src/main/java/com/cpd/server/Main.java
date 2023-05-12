@@ -10,12 +10,15 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.cpd.shared.Consts;
+
 public class Main {
 
     private static final int SERVER_PORT = 8080;
     private static final int BUFFER_SIZE = 1024;
 
     public static void main(String[] args) {
+        System.out.println(new Consts().getGreeting());
         try {
             // Create a new selector
             Selector selector = Selector.open();

@@ -1,11 +1,9 @@
 package com.cpd.server;
 
 import com.cpd.shared.Consts;
-import com.cpd.shared.ControlInterface;
-import java.rmi.RemoteException;
+
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.rmi.server.UnicastRemoteObject;
 
 public class Main {
   public String getGreeting() {
@@ -21,7 +19,7 @@ public class Main {
       // Export the object.
       Registry registry = LocateRegistry.createRegistry(1099);
       // I don't know why we have to rebind at all.
-      // However, this does set the string that you need to use in order to lookup the remote class.
+      // However, this does set the string that you need to use in order to look up the remote class.
       registry.rebind("Master", remoteObj);
     } catch (Exception e) {
       System.err.println("Server exception: " + e.getMessage());

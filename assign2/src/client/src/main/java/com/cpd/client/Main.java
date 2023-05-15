@@ -2,6 +2,7 @@ package com.cpd.client;
 
 import com.cpd.shared.Consts;
 import com.cpd.shared.ControlInterface;
+
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 

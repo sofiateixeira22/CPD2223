@@ -33,3 +33,15 @@ services:
     volumes:
       - './client/build/libs/:/app:ro'
     command: "find /app/ -regex '.*client.*jar' -exec java -jar {} \\;"
+
+  client4:
+    image: openjdk:17-alpine
+    volumes:
+      - './client/build/libs/:/app:ro'
+    command: "find /app/ -regex '.*client.*jar' -exec java -jar {} \\;"
+
+  client5:
+    image: openjdk:17-alpine
+    volumes:
+      - './client/build/libs/:/app:ro'
+    command: "find /app/ -regex '.*client.*jar' -exec java -jar {} \\;"

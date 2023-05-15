@@ -12,6 +12,9 @@ public class ControlImpl extends UnicastRemoteObject implements ControlInterface
 
   public String login(String user, String pass) throws RemoteException {  
     String greeting = "Hello, " + user + "!";
+    Shared sharedObj = Shared.getInstance();
+    sharedObj.add();
+    System.out.println(sharedObj.get());
 
     // create a new thread to handle the greeting
     Thread greetingThread = new Thread(() -> {
@@ -26,7 +29,12 @@ public class ControlImpl extends UnicastRemoteObject implements ControlInterface
 
     // start the greeting thread and return immediately
     greetingThread.start();
+    try {
+      greetingThread.join();
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
 
-    return "Greeting sent.";
+    return greeting;
   }
 }

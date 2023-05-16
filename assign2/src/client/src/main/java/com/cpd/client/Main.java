@@ -2,6 +2,8 @@ package com.cpd.client;
 
 import com.cpd.shared.Consts;
 import com.cpd.shared.ControlInterface;
+import com.cpd.shared.Util;
+import com.cpd.shared.message.MsgString;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -18,12 +20,11 @@ public class Main {
         try {
             Registry registry = LocateRegistry.getRegistry("server");
             ControlInterface stub = (ControlInterface) registry.lookup("Master");
-            String response = stub.login("username", "password");
-            System.out.println("response: " + response);
+            MsgString response = stub.login("user", "password" + Util.sevenRandom());
+            System.out.println("response: " + response.status());
         } catch (Exception e) {
             System.err.println("Client exception: " + e.toString());
             e.printStackTrace();
         }
     }
 }
-

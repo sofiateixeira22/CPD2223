@@ -5,10 +5,15 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class Shared {
   private static Shared instance;
-  private Shared() {}
+  private static Users users;
+  private long times;
+  private final Lock lock;
 
-  private long times = 0;
-  private final Lock lock = new ReentrantLock();
+  private Shared() {
+    times = 0;
+    lock = new ReentrantLock();
+    users = new Users();
+  }
 
   public static Shared getInstance() {
     if (instance == null) {
@@ -16,6 +21,16 @@ public class Shared {
     }
     return instance;
   }
+
+  public Users getUsers() {
+    return users;
+  }
+
+
+
+
+
+
 
   public void add() {
     lock.lock();

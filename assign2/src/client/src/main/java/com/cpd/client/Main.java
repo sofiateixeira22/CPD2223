@@ -1,9 +1,7 @@
 package com.cpd.client;
 
-import com.cpd.shared.ClientInterface;
 import com.cpd.shared.Consts;
 import com.cpd.shared.ControlInterface;
-import com.cpd.shared.Util;
 import com.cpd.shared.message.MsgInfo;
 import com.cpd.shared.message.MsgString;
 
@@ -52,7 +50,7 @@ public class Main {
             });
             pingThread.start();
         } catch (Exception e) {
-            logger.severe("Client exception: " + e.toString());
+            logger.severe("Client exception: " + e);
             e.printStackTrace();
         }
     }

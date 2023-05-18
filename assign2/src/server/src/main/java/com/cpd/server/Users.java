@@ -1,17 +1,14 @@
 package com.cpd.server;
 
-import com.cpd.shared.ClientInterface;
-import com.cpd.shared.ControlInterface;
 import com.cpd.shared.message.Stage;
 import com.cpd.shared.tmap.TMap;
 
-import java.rmi.registry.Registry;
 import java.time.Instant;
 
 class Users {
-    private TMap<String, String> login;
-    private TMap<String, Stage> stages;
-    private TMap<String, Long> lastUpdate;
+    private final TMap<String, String> login;
+    private final TMap<String, Stage> stages;
+    private final TMap<String, Long> lastUpdate;
 
     Users() {
         login = new TMap<>();

@@ -6,5 +6,5 @@ public record MsgInfo(
         Status status,
         Stage stage,
         Integer round,
-        Long timeleft)
+        Long timeLeft)
             implements Serializable { }

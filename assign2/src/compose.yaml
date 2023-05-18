@@ -18,18 +18,24 @@ services:
     image: openjdk:17-alpine
     depends_on:
       - server
+    stop_grace_period: 1s
+    environment:
+      - RMI_USER=user1
+      - RMI_PASS=pass1
     volumes:
       - './client/build/libs/client.jar:/app/client.jar:ro'
     command: "find /app/ -regex '.*client.*jar' -exec java -jar {} \\;"
 
   client2:
     image: openjdk:17-alpine
+    stop_grace_period: 1s
     volumes:
       - './client/build/libs/:/app:ro'
     command: "find /app/ -regex '.*client.*jar' -exec java -jar {} \\;"
 
   client3:
     image: openjdk:17-alpine
+    stop_grace_period: 1s
     volumes:
       - './client/build/libs/:/app:ro'
     command: "find /app/ -regex '.*client.*jar' -exec java -jar {} \\;"

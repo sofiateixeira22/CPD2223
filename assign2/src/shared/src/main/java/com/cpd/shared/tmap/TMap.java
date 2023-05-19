@@ -9,6 +9,7 @@ public class TMap<K, V> {
 
     private final Map<K, V> map;
     private final Lock lock;
+
     public TMap() {
         lock = new ReentrantLock();
         map = new HashMap<>();

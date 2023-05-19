@@ -22,33 +22,32 @@ public class ControlImpl extends UnicastRemoteObject implements ControlInterface
 
     @Override
     public MsgString login(String user, String pass) throws RemoteException {
-        String random = Util.sevenRandom();
-        String tokenCat = user + pass + random;
 
+        Manager manager = Manager.getInstance();
+        boolean valid = manager.register(user, pass);
+        String token = null;
         Status msgStatus = Status.OK;
 
-        String token = Base64.getEncoder().encodeToString(tokenCat.getBytes());
-
-        logger.info("New login from: " + user + " with token " + token);
-        Manager managerObj = Manager.getInstance();
-
-        if (!managerObj.getUsers().login(user, pass)) {
-            msgStatus = Status.BAD_CREDENTIALS;
+        if (valid) {
+            token = manager.getToken(user, pass);
         } else {
-            Manager.getInstance().getUsers().getStages().put(token, Stage.LOGIN);
+            msgStatus = Status.BAD_CREDENTIALS;
         }
 
+        logger.info("New login from: " + user + " with token " + token);
         return new MsgString(msgStatus, token);
     }
 
     @Override
     public MsgInfo ping(String token) throws RemoteException {
+
+        Manager manager = Manager.getInstance();
         Status status = Status.OK;
         Stage stage;
         Integer round = null;
         Long timeLeft = null;
 
-        stage = Manager.getInstance().getUsers().getUserStage(token);
+        stage = manager.getStage(token);
 
         if (stage == null) {
             return new MsgInfo(Status.ERROR, null, null, null);
@@ -59,13 +58,11 @@ public class ControlImpl extends UnicastRemoteObject implements ControlInterface
             timeLeft = 2L;
         }
 
-        Manager.getInstance().getUsers().ping(token);
-
         return new MsgInfo(status, stage, round, timeLeft);
     }
 
     @Override
-    public MsgInfo queue(String token) throws RemoteException {
+    public MsgInfo findNewGame(String token) throws RemoteException {
         logger.info("User " + token + " in queue");
         return new MsgInfo(Status.OK, Stage.QUEUE, null, null);
     }

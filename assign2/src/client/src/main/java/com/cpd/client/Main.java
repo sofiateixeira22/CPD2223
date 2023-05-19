@@ -42,7 +42,7 @@ public class Main {
 //            });
 //            pingThread.start();
 
-            MsgInfo queue_info = stub.queue(token);
+            MsgInfo queue_info = stub.findNewGame(token);
             logger.info("enter queue: " + queue_info.status() + "@" + queue_info.stage());
 
         } catch (Exception e) {

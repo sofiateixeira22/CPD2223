@@ -20,7 +20,6 @@ public class Main {
             System.err.println("Server exception: " + e.getMessage());
             e.printStackTrace();
         }
-        logger.info( "Bound!" );
-        logger.info( "Server will wait forever for messages." );
+        logger.info( "Server ready..." );
     }
 }

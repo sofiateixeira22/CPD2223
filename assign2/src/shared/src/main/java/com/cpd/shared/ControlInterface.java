@@ -10,5 +10,5 @@ public interface ControlInterface extends Remote {
 
     MsgString login(String user, String pass) throws RemoteException;
     MsgInfo ping(String token) throws RemoteException;
-    MsgInfo queue(String token) throws RemoteException;
+    MsgInfo findNewGame(String token) throws RemoteException;
 }

@@ -30,12 +30,12 @@ public class ControlImpl extends UnicastRemoteObject implements ControlInterface
         String token = Base64.getEncoder().encodeToString(tokenCat.getBytes());
 
         logger.info("New login from: " + user + " with token " + token);
-        Shared sharedObj = Shared.getInstance();
+        Manager managerObj = Manager.getInstance();
 
-        if (!sharedObj.getUsers().login(user, pass)) {
+        if (!managerObj.getUsers().login(user, pass)) {
             msgStatus = Status.BAD_CREDENTIALS;
         } else {
-            Shared.getInstance().getUsers().getStages().put(token, Stage.LOGIN);
+            Manager.getInstance().getUsers().getStages().put(token, Stage.LOGIN);
         }
 
         return new MsgString(msgStatus, token);
@@ -48,7 +48,7 @@ public class ControlImpl extends UnicastRemoteObject implements ControlInterface
         Integer round = null;
         Long timeLeft = null;
 
-        stage = Shared.getInstance().getUsers().getUserStage(token);
+        stage = Manager.getInstance().getUsers().getUserStage(token);
 
         if (stage == null) {
             return new MsgInfo(Status.ERROR, null, null, null);
@@ -59,8 +59,14 @@ public class ControlImpl extends UnicastRemoteObject implements ControlInterface
             timeLeft = 2L;
         }
 
-        Shared.getInstance().getUsers().ping(token);
+        Manager.getInstance().getUsers().ping(token);
 
         return new MsgInfo(status, stage, round, timeLeft);
+    }
+
+    @Override
+    public MsgInfo queue(String token) throws RemoteException {
+        logger.info("User " + token + " in queue");
+        return new MsgInfo(Status.OK, Stage.QUEUE, null, null);
     }
 }

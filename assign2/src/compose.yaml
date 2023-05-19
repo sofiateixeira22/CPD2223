@@ -28,26 +28,48 @@ services:
 
   client2:
     image: openjdk:17-alpine
+    depends_on:
+      - server
     stop_grace_period: 1s
+    environment:
+      - RMI_USER=user2
+      - RMI_PASS=pass2
     volumes:
-      - './client/build/libs/:/app:ro'
+      - './client/build/libs/client.jar:/app/client.jar:ro'
     command: "find /app/ -regex '.*client.*jar' -exec java -jar {} \\;"
 
   client3:
     image: openjdk:17-alpine
+    depends_on:
+      - server
     stop_grace_period: 1s
+    environment:
+      - RMI_USER=user3
+      - RMI_PASS=pass3
     volumes:
-      - './client/build/libs/:/app:ro'
+      - './client/build/libs/client.jar:/app/client.jar:ro'
     command: "find /app/ -regex '.*client.*jar' -exec java -jar {} \\;"
 
   client4:
     image: openjdk:17-alpine
+    depends_on:
+      - server
+    stop_grace_period: 1s
+    environment:
+      - RMI_USER=user4
+      - RMI_PASS=pass4
     volumes:
-      - './client/build/libs/:/app:ro'
+      - './client/build/libs/client.jar:/app/client.jar:ro'
     command: "find /app/ -regex '.*client.*jar' -exec java -jar {} \\;"
 
   client5:
     image: openjdk:17-alpine
+    depends_on:
+      - server
+    stop_grace_period: 1s
+    environment:
+      - RMI_USER=user5
+      - RMI_PASS=pass5
     volumes:
-      - './client/build/libs/:/app:ro'
+      - './client/build/libs/client.jar:/app/client.jar:ro'
     command: "find /app/ -regex '.*client.*jar' -exec java -jar {} \\;"

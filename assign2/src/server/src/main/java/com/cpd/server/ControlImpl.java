@@ -44,26 +44,26 @@ public class ControlImpl extends UnicastRemoteObject implements ControlInterface
         Manager manager = Manager.getInstance();
         Status status = Status.OK;
         Stage stage;
-        Integer round = null;
         Long timeLeft = null;
 
         stage = manager.getStage(token);
 
         if (stage == null) {
-            return new MsgInfo(Status.ERROR, null, null, null);
+            return new MsgInfo(Status.ERROR, null, null);
         }
 
         if (stage == Stage.GAME) {
-            round = 1;
             timeLeft = 2L;
         }
 
-        return new MsgInfo(status, stage, round, timeLeft);
+        return new MsgInfo(status, stage, timeLeft);
     }
 
     @Override
     public MsgInfo findNewGame(String token) throws RemoteException {
         logger.info("User " + token + " in queue");
-        return new MsgInfo(Status.OK, Stage.QUEUE, null, null);
+        Manager manager = Manager.getInstance();
+        manager.joinQueue(token);
+        return new MsgInfo(Status.OK, Stage.QUEUE, null);
     }
 }

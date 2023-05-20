@@ -44,7 +44,8 @@ public class Main {
 
             MsgInfo queue_info = stub.findNewGame(token);
             logger.info("enter queue: " + queue_info.status() + "@" + queue_info.stage());
-
+            MsgInfo response2 = stub.findNewGame(token);
+            logger.info("Status: " + response2.status() + " Stage: " + response2.stage());
         } catch (Exception e) {
             logger.severe("Client exception: " + e);
             e.printStackTrace();

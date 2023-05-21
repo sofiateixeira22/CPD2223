@@ -1,6 +1,5 @@
 package com.cpd.server;
 
-import com.cpd.shared.message.MsgInfo;
 import com.cpd.shared.message.Stage;
 
 import java.time.Instant;
@@ -17,7 +16,7 @@ import static com.cpd.shared.Util.sevenRandom;
 public class Manager {
     private static Manager instance;
     public static final int ROOM_PLAYERS = 3;
-    public static final int MAX_ROOMS = 1;
+    public static final int MAX_ROOMS = 2;
     public static final long GAME_TIME_LENGTH_MS = 15000L;
     ExecutorService executor = Executors.newFixedThreadPool(MAX_ROOMS);
     private static final Map<String, String> accounts = new HashMap<>();

@@ -5,8 +5,8 @@ CPD Project2 of group T03G18.
 Group members:
 
 1. Gabriel Alves (201709532)
-2. Sofia
-3. Bruno
+2. Ana Sofia Teixeira (201906031)
+3. Bruno Pascoal (201705562)
 
 ## Trabalho 2
 

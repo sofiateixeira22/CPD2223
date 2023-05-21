@@ -6,6 +6,7 @@ import com.cpd.shared.message.MsgString;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.Random;
 import java.util.logging.Logger;
 
 public class Main {
@@ -46,6 +47,21 @@ public class Main {
             logger.info("enter queue: " + queue_info.status() + "@" + queue_info.stage());
             MsgInfo response2 = stub.findNewGame(token);
             logger.info("Status: " + response2.status() + " Stage: " + response2.stage());
+
+            Thread waitThread = new Thread(() -> {
+                try {
+                    Thread.sleep(4000L);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            waitThread.start();
+            waitThread.join();
+
+            String roomID = stub.ping(token).roomID();
+            int rnd = new Random().nextInt(10);
+            MsgInfo response3 = stub.play(token, roomID, rnd);
+
         } catch (Exception e) {
             logger.severe("Client exception: " + e);
             e.printStackTrace();

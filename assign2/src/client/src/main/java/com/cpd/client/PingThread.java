@@ -24,7 +24,7 @@ public class PingThread extends Thread {
             Registry reg = LocateRegistry.getRegistry("server");
             ControlInterface stub2 = (ControlInterface) reg.lookup("Master");
             MsgInfo resp = stub2.ping(token);
-            logger.info("response: " + resp.status() + " with " + resp.stage());
+            logger.info("response: " + resp.status() + " with " + resp.stage() + " roomId: " + resp.roomID());
         } catch (InterruptedException | RemoteException | NotBoundException e) {
             throw new RuntimeException(e);
         }

@@ -73,3 +73,15 @@ services:
     volumes:
       - './client/build/libs/client.jar:/app/client.jar:ro'
     command: "find /app/ -regex '.*client.*jar' -exec java -jar {} \\;"
+
+  client6:
+    image: openjdk:17-alpine
+    depends_on:
+      - server
+    stop_grace_period: 1s
+    environment:
+      - RMI_USER=user6
+      - RMI_PASS=pass6
+    volumes:
+      - './client/build/libs/client.jar:/app/client.jar:ro'
+    command: "find /app/ -regex '.*client.*jar' -exec java -jar {} \\;"
